@@ -1,0 +1,32 @@
+# Node.js dependencies (backend and frontend)
+backend/node_modules/
+frontend/node_modules/
+
+# Build output (backend and frontend)
+backend/dist/
+frontend/build/
+backend/build/
+frontend/dist/
+
+# Environment variables (backend and frontend)
+backend/.env
+frontend/.env
+
+# Logs (backend and frontend)
+backend/logs/
+frontend/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Testing (backend and frontend)
+backend/coverage/
+frontend/coverage/
