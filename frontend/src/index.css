@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply scroll-smooth text-[62.5%];
+}
+
+body {
+  @apply font-poppins;
+}
+
+input {
+  @apply max-w-full w-full outline-none p-5 bg-transparent;
+}
+
+img {
+  @apply max-w-full w-full h-full object-cover;
+}
+
+/* Login form */
+#login-form .input-container,
+#register-form .input-container {
+  @apply flex flex-col mb-8;
+}
+
+#login-form label,
+#register-form label {
+  @apply text-[12px] font-semibold mb-2;
+}
