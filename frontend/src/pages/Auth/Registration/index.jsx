@@ -14,12 +14,12 @@ const RegisterPage = () => {
     try {
       const res = await AuthService.register(username, email, password);
 
-      if (res.ok) {
+      if (res) {
         setUsername('');
         setEmail('');
         setPassword('');
 
-        toastSuccess('Register successfully', '#333');
+        toastSuccess('Register successfully', '#000');
 
         setTimeout(() => {
           navigate('/login');

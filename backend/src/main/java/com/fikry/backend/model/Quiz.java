@@ -13,7 +13,7 @@ public class Quiz {
     private String title;
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // Annotate the collection side
+    @JsonManagedReference
     private List<Questions> questions;
 
     public Long getId() {

@@ -8,11 +8,9 @@ class AuthService {
   async login(email, password) {
     try {
       const res = await axios.post(AUTH_API_URL + 'login', { email, password });
-      if (res.data.token) {
-        localStorage.setItem('user', JSON.stringify(res.data));
-      }
 
       console.log(res.data);
+      localStorage.setItem('user', JSON.stringify(res.data));
       return res.data;
     } catch (err) {
       console.log('Error: ', err);
@@ -29,7 +27,7 @@ class AuthService {
     try {
       const res = await axios.post(AUTH_API_URL + 'register', { username, email, password });
 
-      if (!res.data.role) {
+      if (res.data.role === null) {
         res.data.role = 'user';
       }
 

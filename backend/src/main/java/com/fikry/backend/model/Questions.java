@@ -10,12 +10,11 @@ import java.util.List;
 public class Questions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnoreProperties("id") // Ignore the 'id' property
+    @JsonIgnoreProperties("id") 
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "quiz_id", nullable = false)
-    @JsonBackReference// Add this annotation to break infinite recursion
+    @JsonBackReference
     private Quiz quiz;
 
     private String questionText;

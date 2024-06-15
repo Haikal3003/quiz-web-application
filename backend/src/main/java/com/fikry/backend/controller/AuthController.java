@@ -1,6 +1,5 @@
 package com.fikry.backend.controller;
 
-import com.fikry.backend.model.ChangePasswordRequest;
 import com.fikry.backend.model.User;
 import com.fikry.backend.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +36,4 @@ public class AuthController {
         }
     }
 
-    @PutMapping("/change-password")
-    public ResponseEntity<User> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest) {
-        try {
-            User updatedUser = authService.changePassword(changePasswordRequest.getUserId(),
-                    changePasswordRequest.getCurrentPassword(),
-                    changePasswordRequest.getNewPassword());
-            return ResponseEntity.ok(updatedUser);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-    }
 }

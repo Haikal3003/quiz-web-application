@@ -35,13 +35,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public User registerUser(User user){
-        if(userRepository.findByEmail(user.getEmail()).isPresent()){
-            throw new RuntimeException("Email is already registered");
-        }
-
-        return userRepository.save(user);
-    }
+   
 
 
 

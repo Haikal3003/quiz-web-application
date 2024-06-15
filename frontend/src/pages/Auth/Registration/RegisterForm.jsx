@@ -7,20 +7,20 @@ const RegisterForm = ({ username, setUsername, email, setEmail, password, setPas
       <div className="input-container relative">
         <label>Username:</label>
         <div id="input-div" className="max-w-full w-full bg-slate-100 flex  ">
-          <input id="register-input" type="text" placeholder="Enter Username..." name="username" value={username} onChange={setUsername} />
+          <input id="username-input" type="text" placeholder="Enter Username..." name="username" value={username} onChange={setUsername} />
         </div>
       </div>
       <div className="input-container">
         <label>Email:</label>
         <div id="input-div" className="max-w-full w-full bg-slate-100">
-          <input id="register-input" type="email" placeholder="Enter username..." name="email" value={email} onChange={setEmail} />
+          <input id="email-input" type="email" placeholder="Enter username..." name="email" value={email} onChange={setEmail} />
         </div>
       </div>
 
       <div className="input-container relative">
         <label>Password:</label>
         <div id="input-div" className="max-w-full w-full bg-slate-100 flex  ">
-          <input id="register-input" type="password" placeholder="Enter password..." name="password" value={password} onChange={setPassword} />
+          <input id="password-input" type="password" placeholder="Enter password..." name="password" value={password} onChange={setPassword} />
         </div>
       </div>
 

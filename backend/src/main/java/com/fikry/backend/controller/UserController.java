@@ -3,8 +3,6 @@ package com.fikry.backend.controller;
 import com.fikry.backend.model.User;
 import com.fikry.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,13 +41,5 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @PostMapping
-    public ResponseEntity<?> registerUser(@RequestBody User user){
-        try{
-            User registeredUser = userService.registerUser(user);
-            return ResponseEntity.ok(registeredUser);
-        }catch (RuntimeException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
+   
 }

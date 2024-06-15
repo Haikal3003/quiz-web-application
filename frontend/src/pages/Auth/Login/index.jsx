@@ -3,31 +3,21 @@ import LoginForm from './LoginForm';
 import AuthService from '../../../services/AuthService';
 import { useNavigate } from 'react-router-dom';
 
-const LoginPage = ({ setCurrentUser }) => {
+const LoginPage = ({ setCurrentUser, setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const res = await AuthService.login(email, password);
+      const user = await AuthService.login(email, password);
 
-      if (res.ok) {
-        setEmail('');
-        setPassword('');
-
-        const currentUser = await res.json();
-        setCurrentUser(currentUser);
-
+      if (user) {
+        setCurrentUser(user);
+        setIsAuthenticated(true);
         setTimeout(() => {
-          if (currentUser.role === 'admin') {
-            navigate('/admin/dashboard');
-          } else {
-            navigate('/user/dashboard');
-          }
+          navigate(user.role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
         }, 2000);
-
-        window.location.reload();
       }
     } catch (error) {
       console.log(error);

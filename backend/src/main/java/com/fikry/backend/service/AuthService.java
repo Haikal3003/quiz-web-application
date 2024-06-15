@@ -32,21 +32,12 @@ public class AuthService {
             throw new RuntimeException("Email is already registered");
         }
 
+        if(user.getRole() == null || user.getRole().isEmpty()) {
+            user.setRole("user");
+        }
+
         return userRepository.save(user);
     }
 
-    public User changePassword(Long userId, String currentPassword, String newPassword) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            if (user.getPassword().equals(currentPassword)) {
-                user.setPassword(newPassword);
-                return userRepository.save(user);
-            } else {
-                throw new RuntimeException("Current password is incorrect");
-            }
-        } else {
-            throw new RuntimeException("User not found");
-        }
-    }
+    
 }
