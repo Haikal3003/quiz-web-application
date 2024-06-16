@@ -19,7 +19,7 @@ const RegisterPage = () => {
         setEmail('');
         setPassword('');
 
-        toastSuccess('Register successfully', '#000');
+        toastSuccess('Register successfully');
 
         setTimeout(() => {
           navigate('/login');

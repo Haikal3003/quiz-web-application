@@ -1,28 +1,28 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { toastError } from '../utils/Toast';
 
 const AUTH_API_URL = 'http://localhost:8080/api/auth/';
 
 class AuthService {
-  //   Auth login
+  //  login
   async login(email, password) {
     try {
       const res = await axios.post(AUTH_API_URL + 'login', { email, password });
 
-      console.log(res.data);
       localStorage.setItem('user', JSON.stringify(res.data));
+
       return res.data;
     } catch (err) {
-      console.log('Error: ', err);
+      toastError('Error to login');
     }
   }
 
-  //   Auth logout
+  //  logout
   logout() {
     localStorage.removeItem('user');
   }
 
-  //   Auth register
+  //  register
   async register(username, email, password) {
     try {
       const res = await axios.post(AUTH_API_URL + 'register', { username, email, password });
@@ -31,11 +31,10 @@ class AuthService {
         res.data.role = 'user';
       }
 
-      console.log(res.data);
       localStorage.setItem('user', JSON.stringify(res.data));
       return res.data;
     } catch (err) {
-      console.log('Error: ', err);
+      toastError('Error to register');
     }
   }
 

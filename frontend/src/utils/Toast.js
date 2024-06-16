@@ -1,30 +1,19 @@
 import toast from 'react-hot-toast';
 
 const toastSuccess = (message) => {
-  toast.success(message, {
-    style: {
-      padding: '13px',
-      fontSize: '13px',
-      color: '#fff',
-    },
-
-    iconTheme: {
-      primary: '#fff',
-      secondary: '#FFFAEE',
-    },
-  });
+  toast.success(message);
 };
 
 const toastError = (message) => {
-  toast.error(message, {
-    style: {
-      fontSize: '13px',
-    },
-  });
+  toast.error(message);
 };
 
 const toastPromise = (promise) => {};
 
-const toastEmoji = (emoji) => {};
+const toastEmoji = (emoji) => {
+  toast('Welcome buddy!', {
+    icon: '👏',
+  });
+};
 
 export { toastSuccess, toastError, toastPromise, toastEmoji };
