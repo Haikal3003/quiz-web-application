@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply font-poppins;
+  @apply font-poppins bg-dark;
 }
 
 input {
@@ -16,6 +16,14 @@ input {
 
 img {
   @apply max-w-full w-full h-full object-cover;
+}
+
+section {
+  @apply ml-[12%] mr-[5%] pt-[50px] text-white;
+}
+
+section #heading {
+  @apply text-[35px] uppercase font-bold;
 }
 
 /* Login form */

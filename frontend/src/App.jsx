@@ -5,7 +5,7 @@ import LoginPage from './pages/Auth/Login';
 import RegisterPage from './pages/Auth/Registration';
 import AuthService from './services/AuthService';
 import AdminRoutes from './routes/AdminRoutes';
-import UserRoutes from './routes/UserRoutes';
+import MemberRoutes from './routes/MemberRoutes';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
@@ -28,7 +28,7 @@ function App() {
 
           <Route path="/admin/*" element={isAuthenticated && currentUser?.role === 'admin' ? <AdminRoutes /> : <Navigate to="/login" />} />
 
-          <Route path="/user/*" element={isAuthenticated && currentUser?.role === 'user' ? <UserRoutes /> : <Navigate to="/login" />} />
+          <Route path="/user/*" element={isAuthenticated && currentUser?.role === 'user' ? <MemberRoutes /> : <Navigate to="/login" />} />
 
           <Route path="/" element={<Navigate to="/login" />} />
         </Routes>

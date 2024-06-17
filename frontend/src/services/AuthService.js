@@ -28,7 +28,7 @@ class AuthService {
       const res = await axios.post(AUTH_API_URL + 'register', { username, email, password });
 
       if (res.data.role === null) {
-        res.data.role = 'user';
+        res.data.role = 'member';
       }
 
       localStorage.setItem('user', JSON.stringify(res.data));
@@ -46,7 +46,7 @@ class AuthService {
   //   get user role
   getUserRole() {
     const user = this.getCurrentUser();
-    return user ? user.role : 'user';
+    return user ? user.role : 'member';
   }
 }
 

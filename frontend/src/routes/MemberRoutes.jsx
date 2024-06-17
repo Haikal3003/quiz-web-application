@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import UserPage from '../pages/User/index';
+import UserPage from '../pages/Member/index';
 
-const UserRoutes = () => {
+const MemberRoutes = () => {
   return (
     <Routes>
       <Route path="dashboard" element={<UserPage />} />
@@ -10,4 +10,4 @@ const UserRoutes = () => {
   );
 };
 
-export default UserRoutes;
+export default MemberRoutes;

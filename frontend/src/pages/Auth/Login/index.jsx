@@ -16,7 +16,7 @@ const LoginPage = ({ setCurrentUser, setIsAuthenticated }) => {
         setCurrentUser(user);
         setIsAuthenticated(true);
         setTimeout(() => {
-          navigate(user.role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
+          navigate(user.role === 'admin' ? '/admin/dashboard' : '/member/dashboard');
         }, 2000);
       }
     } catch (error) {
