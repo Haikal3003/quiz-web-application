@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import com.fikry.backend.repository.QuizRepository;
 
 @Service
 public class QuizService {
-    
+
     @Autowired
     private QuizRepository quizRepository;
 
@@ -26,75 +25,55 @@ public class QuizService {
 
     public List<QuizDTO> getAllQuizzes() {
         return quizRepository.findAll().stream()
-            .map(quiz -> modelMapper.map(quiz, QuizDTO.class))
+            .map(this::convertToDtoWithQuestions)
             .collect(Collectors.toList());
     }
 
-    public Optional<QuizDTO> getQuizById(Long id){
+    public Optional<QuizDTO> getQuizById(Long id) {
         return quizRepository.findById(id)
-            .map(quiz -> modelMapper.map(quiz, QuizDTO.class));
+            .map(this::convertToDtoWithQuestions);
     }
 
-    public QuizDTO createQuiz(QuizDTO quizDTO){
-        Quiz quiz = modelMapper.map(quizDTO, Quiz.class);
-
-        if(quizDTO.getQuestions() != null){
-            for(QuestionDTO questionDTO : quizDTO.getQuestions()){
-                Question question = modelMapper.map(questionDTO, Question.class);
-                question.setQuiz(quiz);
-                quiz.getQuestions().add(question);
-            }           
-        }
-
+    public QuizDTO createQuiz(QuizDTO quizDTO) {
+        Quiz quiz = convertToEntity(quizDTO);
+        List<Question> questions = convertToEntityQuestions(quizDTO.getQuestions(), quiz);
+        quiz.setQuestions(questions);
         Quiz savedQuiz = quizRepository.save(quiz);
-
-        return modelMapper.map(savedQuiz, QuizDTO.class);
+        return convertToDtoWithQuestions(savedQuiz);
     }
 
-    public QuizDTO updateQuiz(Long id, QuizDTO quizDTO){
-        Optional<Quiz> optionalQuiz = quizRepository.findById(id);
 
-        if(optionalQuiz.isPresent()){
-            Quiz quizToUpdate = optionalQuiz.get();
-
-            quizToUpdate.setTitle(quizDTO.getTitle());
-            quizToUpdate.setCategory(quizDTO.getCategory());
-
-            if(quizDTO.getQuestions() != null){
-                for(QuestionDTO questionDTO : quizDTO.getQuestions()){
-                    if(questionDTO.getId() != null){
-                        Optional<Question> optionalQuestion = quizToUpdate.getQuestions().stream()
-                                                            .filter(question -> question.getId().equals(questionDTO.getId()))
-                                                            .findFirst();
-
-                        if(optionalQuestion.isPresent()){
-                            Question question = optionalQuestion.get();
-                            modelMapper.map(questionDTO, question);
-                        }
-
-                    }else{
-                        Question question = modelMapper.map(questionDTO, Question.class);
-                        question.setQuiz(quizToUpdate);
-                        quizToUpdate.getQuestions().add(question);
-                    }
-                }
-            }
-
-            Quiz savedQuiz = quizRepository.save(quizToUpdate);
-            return modelMapper.map(savedQuiz, QuizDTO.class);
-        }else{
-            throw new RuntimeException("Quiz with id " + id + " not found");
-        }
-    }
-
-    public void deleteQuizById(Long id){
+    public void deleteQuizById(Long id) {
         quizRepository.deleteById(id);
     }
 
-    public Optional<QuizDTO> getQuizByCategory(String category){
+    public Optional<QuizDTO> getQuizByCategory(String category) {
         return quizRepository.findQuizByCategory(category)
-                .map(quiz -> modelMapper.map(quiz, QuizDTO.class));
+            .map(this::convertToDtoWithQuestions);
     }
-    
-}
 
+    private QuizDTO convertToDtoWithQuestions(Quiz quiz) {
+        QuizDTO quizDTO = modelMapper.map(quiz, QuizDTO.class);
+        List<QuestionDTO> questionDTOs = quiz.getQuestions().stream()
+            .map(question -> modelMapper.map(question, QuestionDTO.class))
+            .collect(Collectors.toList());
+        quizDTO.setQuestions(questionDTOs);
+        return quizDTO;
+    }
+
+    private List<Question> convertToEntityQuestions(List<QuestionDTO> questionDTOs, Quiz quiz) {
+        return questionDTOs.stream()
+            .map(questionDTO -> {
+                Question question = modelMapper.map(questionDTO, Question.class);
+                question.setQuiz(quiz);
+                return question;
+            })
+            .collect(Collectors.toList());
+    }
+
+    private Quiz convertToEntity(QuizDTO quizDTO) {
+        return modelMapper.map(quizDTO, Quiz.class);
+    }
+
+   
+}

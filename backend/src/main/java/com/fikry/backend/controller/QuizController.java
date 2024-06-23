@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.fikry.backend.service.QuizService;
 
 @RestController
 @RequestMapping("/api/quizzes") // Corrected the endpoint path
+@CrossOrigin
 public class QuizController {
 
     @Autowired
@@ -50,11 +52,14 @@ public class QuizController {
 
     @PutMapping("/update/{id}") 
     public ResponseEntity<QuizDTO> updateQuiz(@PathVariable Long id, @RequestBody QuizDTO quizDTO){
-        try {
-            QuizDTO updatedQuiz = quizService.updateQuiz(id, quizDTO);
-            return ResponseEntity.ok(updatedQuiz);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
+        Optional<QuizDTO> updatedQuiz = quizService.getQuizById(id);
+        
+        if (updatedQuiz.isPresent()) {
+            quizDTO.setId(id);
+            QuizDTO result = quizService.createQuiz(quizDTO);
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 

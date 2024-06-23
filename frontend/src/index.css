@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply font-poppins bg-dark;
+  @apply font-poppins bg-white;
 }
 
 input {

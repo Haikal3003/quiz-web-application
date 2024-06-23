@@ -1,4 +1,4 @@
-import Rect, { useState } from 'react';
+import React, { useState } from 'react';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 

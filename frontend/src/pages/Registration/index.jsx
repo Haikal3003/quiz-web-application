@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import RegisterForm from './RegisterForm';
-import AuthService from '../../../services/AuthService';
+import AuthService from '../../services/AuthService';
 import { useNavigate } from 'react-router-dom';
-import { toastSuccess } from '../../../utils/Toast';
+import { toastSuccess } from '../../utils/Toast';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');

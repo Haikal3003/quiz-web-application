@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Container from './components/Container';
-import LoginPage from './pages/Auth/Login';
-import RegisterPage from './pages/Auth/Registration';
+import LoginPage from './pages/Login';
+import RegisterPage from './pages/Registration';
 import AuthService from './services/AuthService';
 import AdminRoutes from './routes/AdminRoutes';
 import MemberRoutes from './routes/MemberRoutes';

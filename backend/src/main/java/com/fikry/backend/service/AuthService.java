@@ -22,7 +22,7 @@ public class AuthService {
     private ModelMapper modelMapper;
 
     public UserDTO login(LoginDTO loginDTO){
-        Optional<User> optionalUser = userRepository.findByUsername(loginDTO.getUsername());
+        Optional<User> optionalUser = userRepository.findByEmail(loginDTO.getEmail());
 
         if(optionalUser.isPresent() && optionalUser.get().getPassword().equals(loginDTO.getPassword())){
             return modelMapper.map(optionalUser.get(), UserDTO.class);
@@ -34,7 +34,7 @@ public class AuthService {
 
 
     public UserDTO register(RegisterDTO registerDTO){
-        Optional<User> existingUser = userRepository.findByUsername(registerDTO.getUsername());
+        Optional<User> existingUser = userRepository.findByEmail(registerDTO.getEmail());
         
         if(existingUser.isPresent()){
             throw new RuntimeException("Username already taken");

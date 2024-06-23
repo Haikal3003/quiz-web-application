@@ -11,6 +11,7 @@ import com.fikry.backend.service.QuizResultService;
 
 @RestController
 @RequestMapping("/api/quiz-results")
+@CrossOrigin
 public class QuizResultController {
 
     @Autowired

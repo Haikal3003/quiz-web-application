@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
-import AuthService from '../../../services/AuthService';
+import AuthService from '../../services/AuthService';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = ({ setCurrentUser, setIsAuthenticated }) => {
