@@ -1,42 +1,48 @@
 package com.fikry.backend.service;
 
-import com.fikry.backend.model.User;
-import com.fikry.backend.repository.UserRepository;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.fikry.backend.repository.UserRepository;
+import com.fikry.backend.dto.UserDTO;
+
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
-    }
+    @Autowired
+    private ModelMapper modelMapper;
 
-    public User getUserById(Long id){
-        return userRepository.findById(id).orElse(null);
-    }
-
-    public User saveUser(User user){
-        return userRepository.save(user);
-    }
-
-    public void deleteUser(Long id){
-        userRepository.deleteById(id);
-    }
-
-    public List<User> getUsersByRole(String role){
-        return getAllUsers().stream()
-                .filter(user -> user.getRole().equals(role))
+    public List<UserDTO> getAllUsers(){
+        return userRepository.findAll()
+                .stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
     }
 
-   
+    public Optional<UserDTO> getUserById(Long id){
+        return userRepository.findById(id).map(user -> modelMapper.map(user, UserDTO.class));
 
+    }
 
+    public Optional<UserDTO> getUserByUsername(String username){
+        return userRepository.findByUsername(username).map(user -> modelMapper.map(user, UserDTO.class));
+    }
 
+    public Optional<UserDTO> getUserByEmail(String email){
+        return userRepository.findByEmail(email).map(user -> modelMapper.map(user, UserDTO.class));
+    }
+
+    public void deleteUserById(Long id){
+        userRepository.deleteById(id);
+    }
+    
 }

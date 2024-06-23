@@ -1,43 +1,57 @@
 package com.fikry.backend.service;
 
-import com.fikry.backend.model.User;
-import com.fikry.backend.repository.UserRepository;
+import java.util.Optional;
+
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.fikry.backend.dto.LoginDTO;
+import com.fikry.backend.dto.RegisterDTO;
+import com.fikry.backend.dto.UserDTO;
+import com.fikry.backend.model.User;
+import com.fikry.backend.repository.UserRepository;
 
 @Service
 public class AuthService {
-
     @Autowired
     private UserRepository userRepository;
 
-    public User authenticateUser(String email, String password) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
+    @Autowired 
+    private ModelMapper modelMapper;
 
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            if (user.getPassword().equals(password)) {
-                return user;
-            }
+    public UserDTO login(LoginDTO loginDTO){
+        Optional<User> optionalUser = userRepository.findByUsername(loginDTO.getUsername());
+
+        if(optionalUser.isPresent() && optionalUser.get().getPassword().equals(loginDTO.getPassword())){
+            return modelMapper.map(optionalUser.get(), UserDTO.class);
+        }else{
+            throw new RuntimeException("Invalid username and password");
         }
 
-        return null;
     }
 
-    public User registerUser(User user) {
-        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
-        if (existingUser.isPresent()) {
-            throw new RuntimeException("Email is already registered");
+
+    public UserDTO register(RegisterDTO registerDTO){
+        Optional<User> existingUser = userRepository.findByUsername(registerDTO.getUsername());
+        
+        if(existingUser.isPresent()){
+            throw new RuntimeException("Username already taken");
         }
 
-        if(user.getRole() == null || user.getRole().isEmpty()) {
-            user.setRole("user");
+        User user = modelMapper.map(registerDTO, User.class);
+
+        if(user.getRole() == null || user.getRole().isEmpty()){
+            user.setRole("member");
         }
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        return modelMapper.map(savedUser, UserDTO.class);
     }
 
-    
+
+
+
 }
