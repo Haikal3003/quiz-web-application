@@ -29,7 +29,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/user/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<UserDTO>> getUserById(@PathVariable Long id){
         Optional<UserDTO> user = userService.getUserById(id);
 
@@ -40,7 +40,7 @@ public class UserController {
         }
     } 
 
-    @GetMapping("/user/username/{username}")
+    @GetMapping("/username/{username}")
     public ResponseEntity<Optional<UserDTO>> getUserByUsername(@PathVariable String username){
         Optional<UserDTO> user = userService.getUserByUsername(username);
     
@@ -51,7 +51,7 @@ public class UserController {
         }
     }
     
-    @GetMapping("/user/email/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<Optional<UserDTO>> getUserByEmail(@PathVariable String email){
         Optional<UserDTO> user = userService.getUserByEmail(email);
     
@@ -62,7 +62,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable Long id){
         Optional<UserDTO> user = userService.getUserById(id);
 

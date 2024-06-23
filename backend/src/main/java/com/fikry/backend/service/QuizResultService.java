@@ -109,6 +109,7 @@ public class QuizResultService {
                 throw new IllegalArgumentException("Quiz with ID " + quizResultDTO.getQuizId() + " not found");
             }
         }
+        
         return quizResult;
     }
 }

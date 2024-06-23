@@ -31,13 +31,13 @@ public class QuizResultController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/add-quiz-result")
     public ResponseEntity<QuizResultDTO> createQuizResult(@RequestBody QuizResultDTO quizResultDTO) {
         QuizResultDTO createdQuizResult = quizResultService.createQuizResult(quizResultDTO);
         return ResponseEntity.ok(createdQuizResult);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<QuizResultDTO> updateQuizResult(@PathVariable Long id, @RequestBody QuizResultDTO quizResultDTO) {
         QuizResultDTO updatedQuizResult = quizResultService.updateQuizResult(id, quizResultDTO);
         if (updatedQuizResult != null) {
@@ -46,7 +46,7 @@ public class QuizResultController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteQuizResult(@PathVariable Long id) {
         quizResultService.deleteQuizResult(id);
         return ResponseEntity.ok("Delete quiz result successfully !!!");
