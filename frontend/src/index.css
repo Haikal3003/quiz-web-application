@@ -7,10 +7,12 @@ html {
 }
 
 body {
-  @apply font-poppins bg-white;
+  @apply font-poppins;
 }
 
-input {
+input,
+select,
+option {
   @apply max-w-full w-full outline-none p-5 bg-transparent;
 }
 
@@ -19,11 +21,11 @@ img {
 }
 
 section {
-  @apply ml-[12%] mr-[5%] pt-[50px] text-white;
+  @apply relative ml-[20%] mr-[5%] mt-20;
 }
 
 section #heading {
-  @apply text-[35px] uppercase font-bold;
+  @apply text-[25px] uppercase font-bold;
 }
 
 /* Login form */
@@ -35,4 +37,25 @@ section #heading {
 #login-form label,
 #register-form label {
   @apply text-[12px] font-semibold mb-2;
+}
+
+/* quiz form */
+#create-quiz-page #quiz-form label {
+  @apply font-semibold text-[11px];
+}
+
+#create-quiz-page #quiz-form input {
+  @apply bg-gray mt-2;
+}
+
+#create-quiz-page #quiz-form select {
+  @apply bg-gray mt-2;
+}
+
+#create-quiz-page #quiz-form option {
+  @apply bg-gray mt-2;
+}
+
+#quiz-form #line {
+  @apply w-full h-[2px] bg-black;
 }

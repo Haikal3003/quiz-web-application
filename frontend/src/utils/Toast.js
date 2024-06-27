@@ -1,7 +1,17 @@
 import toast from 'react-hot-toast';
 
 const toastSuccess = (message) => {
-  toast.success(message);
+  toast.success(message, {
+    style: {
+      padding: '13px',
+      fontSize: '13px',
+      backgroundColor: 'green',
+    },
+    iconTheme: {
+      primary: '#FFFAEE',
+      secondary: '#FFFAEE',
+    },
+  });
 };
 
 const toastError = (message) => {

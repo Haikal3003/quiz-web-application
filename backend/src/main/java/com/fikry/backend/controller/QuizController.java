@@ -19,7 +19,7 @@ import com.fikry.backend.dto.QuizDTO;
 import com.fikry.backend.service.QuizService;
 
 @RestController
-@RequestMapping("/api/quizzes") // Corrected the endpoint path
+@RequestMapping("/api/quizzes") 
 @CrossOrigin
 public class QuizController {
 

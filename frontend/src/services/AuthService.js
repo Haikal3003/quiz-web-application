@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { toastError } from '../utils/Toast';
 
-const AUTH_API_URL = 'http://localhost:8080/api/auth/';
+const AUTH_API_URL = 'http://localhost:8080/api/auth';
 
 class AuthService {
   //  login
   async login(email, password) {
     try {
-      const res = await axios.post(AUTH_API_URL + 'login', { email, password });
+      const res = await axios.post(AUTH_API_URL + '/login', { email, password });
 
       localStorage.setItem('user', JSON.stringify(res.data));
 
@@ -25,7 +25,7 @@ class AuthService {
   //  register
   async register(username, email, password) {
     try {
-      const res = await axios.post(AUTH_API_URL + 'register', { username, email, password });
+      const res = await axios.post(AUTH_API_URL + '/register', { username, email, password });
 
       if (res.data.role === null) {
         res.data.role = 'member';
