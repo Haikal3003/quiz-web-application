@@ -6,6 +6,7 @@ import ManageQuiz from '../pages/Admin/ManageQuiz';
 import MemberList from '../pages/Admin/MemberList';
 import QuizReport from '../pages/Admin/QuizReport';
 import CreateQuizPage from '../pages/Admin/ManageQuiz/CreateQuizPage';
+import EditQuizPage from '../pages/Admin/ManageQuiz/EditQuizPage';
 
 const AdminRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AdminRoutes = () => {
         <Route path="member-list" element={<MemberList />} />
         <Route path="quiz-report" element={<QuizReport />} />
         <Route path="manage-quiz/add-quiz" element={<CreateQuizPage />} />
+        <Route path="manage-quiz/update-quiz/:quizId" element={<EditQuizPage />} />
       </Routes>
     </>
   );

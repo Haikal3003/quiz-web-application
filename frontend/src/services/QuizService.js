@@ -13,6 +13,16 @@ class QuizService {
     }
   }
 
+  // Get quiz by id
+  async getQuizById(id) {
+    try {
+      const res = await axios.get(QUIZ_API_URL + `/${id}`);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // Create quiz
   async createQuiz(quiz) {
     try {
@@ -25,6 +35,8 @@ class QuizService {
 
   async updateQuiz(id, quiz) {
     try {
+      const res = await axios.put(QUIZ_API_URL + `/update/${id}`, quiz);
+      return res.data;
     } catch (error) {
       console.log(error);
     }

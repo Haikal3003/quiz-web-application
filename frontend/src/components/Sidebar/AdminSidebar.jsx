@@ -31,7 +31,7 @@ const AdminSidebar = () => {
               <Link to={item.to} key={index}>
                 <li
                   className={`relative w-full h-[40px] flex items-center pl-6 gap-10 border-[1px] border-gray 
-                  ${isActive ? 'bg-blue-300 text-white' : 'hover:bg-blue-300 hover:text-white transition'} rounded-md`}
+                  ${isActive ? 'bg-black text-white' : 'hover:bg-black hover:text-white transition'} rounded-md`}
                 >
                   <span className="menu-icon text-[18px]">{item.icon}</span>
                   <span className="menu-text font-semibold flex-none">{item.text}</span>

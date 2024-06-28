@@ -41,8 +41,12 @@ public class UserService {
         return userRepository.findByEmail(email).map(user -> modelMapper.map(user, UserDTO.class));
     }
 
+    public Optional<UserDTO> getUserByRole(String role){
+        return userRepository.findByRole(role).map(user -> modelMapper.map(user, UserDTO.class));
+    }
+
     public void deleteUserById(Long id){
         userRepository.deleteById(id);
     }
-    
+
 }

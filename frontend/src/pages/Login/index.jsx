@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import AuthService from '../../services/AuthService';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../../components/Loader';
 
 const LoginPage = ({ setCurrentUser, setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    setLoading(true);
     try {
       const user = await AuthService.login(email, password);
 
@@ -21,6 +24,8 @@ const LoginPage = ({ setCurrentUser, setIsAuthenticated }) => {
       }
     } catch (error) {
       console.log("Can't not login");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,6 +38,8 @@ const LoginPage = ({ setCurrentUser, setIsAuthenticated }) => {
       <div className="max-w-full w-full h-full">
         <img src="src/assets/AuthPage.jpg" alt="" />
       </div>
+
+      {loading && <Loader />}
     </div>
   );
 };

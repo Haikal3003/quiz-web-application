@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { toastError } from '../utils/Toast';
 
-const AUTH_API_URL = 'http://localhost:8080/api/auth';
+const AUTH_API_URL = "http://localhost:8080/api/auth";
 
 class AuthService {
   //  login
@@ -12,8 +11,8 @@ class AuthService {
       localStorage.setItem('user', JSON.stringify(res.data));
 
       return res.data;
-    } catch (err) {
-      toastError('Error to login');
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -33,8 +32,8 @@ class AuthService {
 
       localStorage.setItem('user', JSON.stringify(res.data));
       return res.data;
-    } catch (err) {
-      toastError('Error to register');
+    } catch (error) {
+      console.log(error);
     }
   }
 

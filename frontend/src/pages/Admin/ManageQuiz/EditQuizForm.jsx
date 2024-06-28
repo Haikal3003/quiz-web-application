@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const CreateQuizForm = ({ onSaveQuiz }) => {
+const EditQuizForm = ({ quiz, onSaveUpdateQuiz }) => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    if (quiz) {
+      setTitle(quiz.title || '');
+      setCategory(quiz.category || '');
+      setQuestions(quiz.questions || []);
+    }
+  }, [quiz]);
 
   const handleAddQuestion = () => {
     setQuestions([...questions, { question: '', options: ['', '', '', ''], correctAnswer: '' }]);
@@ -25,14 +33,9 @@ const CreateQuizForm = ({ onSaveQuiz }) => {
     setQuestions(newQuestions);
   };
 
-  const saveQuiz = () => {
-    if (!title || !category || questions.length < 5) {
-      console.log('Failed to create quiz: Title, category, or minimum 5 questions requirement not met.');
-      return;
-    }
-
-    const newQuiz = { title, category, questions };
-    onSaveQuiz(newQuiz);
+  const saveUpdateQuiz = () => {
+    const updatedQuiz = { title, category, questions };
+    onSaveUpdateQuiz(updatedQuiz);
   };
 
   return (
@@ -81,12 +84,13 @@ const CreateQuizForm = ({ onSaveQuiz }) => {
           Add Question
         </button>
 
-        <button type="button" id="add-quiz-button" className="w-[150px] h-[40px] bg-black text-white rounded-md" onClick={saveQuiz}>
-          Create
+        <button type="button" id="save-quiz-button" className="w-[150px] h-[40px] bg-black text-white rounded-md" onClick={saveUpdateQuiz}>
+          Save
         </button>
       </div>
+      
     </form>
   );
 };
 
-export default CreateQuizForm;
+export default EditQuizForm;

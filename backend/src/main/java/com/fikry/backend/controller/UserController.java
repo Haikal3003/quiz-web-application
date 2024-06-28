@@ -64,6 +64,17 @@ public class UserController {
         }
     }
 
+    @GetMapping("/role/{role}")
+    public ResponseEntity<Optional<UserDTO>> getUserByRole(@PathVariable String role){
+        Optional<UserDTO> user = userService.getUserByRole(role);
+
+        if(user.isPresent()){
+            return ResponseEntity.ok(user);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    } 
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable Long id){
         Optional<UserDTO> user = userService.getUserById(id);

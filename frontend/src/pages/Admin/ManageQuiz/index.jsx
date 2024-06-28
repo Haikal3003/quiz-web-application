@@ -18,6 +18,12 @@ const ManageQuiz = () => {
 
     fetchQuiz();
   }, []);
+
+  const handleDeleteQuiz = (id) => {
+    const deletedQuiz = quizzes.filter((quiz) => quiz.id !== id);
+    setQuizzes(deletedQuiz);
+  };
+
   return (
     <section id="admin-manage-quiz">
       <h1 id="heading">Manage Quiz</h1>
@@ -32,7 +38,7 @@ const ManageQuiz = () => {
 
         <div id="quiz-card-container" className="grid grid-cols-3 gap-3 my-10">
           {quizzes.map((quiz) => {
-            return <QuizCard key={quiz.id} id={quiz.id} quiz={quiz} />;
+            return <QuizCard key={quiz.id} quiz={quiz} onDeleteQuiz={handleDeleteQuiz}/>;
           })}
         </div>
       </div>
