@@ -18,7 +18,6 @@ const MemberList = () => {
         const users = await UserService.getAllUsers();
         const members = users.filter((user) => user.role === 'member');
         setMembers(members);
-        console.log(members);
       } catch (error) {
         console.log(error);
       }
@@ -43,11 +42,10 @@ const MemberList = () => {
 
   const handleConfirmDelete = async () => {
     try {
-      const deletedMember = await UserService.deleteUserById(memberToDelete.id);
+      await UserService.deleteUserById(memberToDelete.id);
       setMembers((prevMembers) => prevMembers.filter((member) => member.id !== memberToDelete.id));
       setDeleteModalActive(false);
       setMemberToDelete(null);
-      console.log(deletedMember);
     } catch (error) {
       console.log(error);
     }
@@ -63,31 +61,35 @@ const MemberList = () => {
       </div>
 
       <div id="member-list-container" className="flex flex-col gap-4">
-        {filteredMembers.map((member) => (
-          <div key={member.id} className="w-full border-[1px] border-gray p-3 rounded-md flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <div id="profile-image" className="w-[45px] h-[45px] rounded-full bg-slate-200"></div>
-              <div>
-                <h2 className="text-[11px] font-bold">{member.username}</h2>
-                <span>{member.role}</span>
+        {filteredMembers.length > 0 ? (
+          filteredMembers.map((member) => (
+            <div key={member.id} className="w-full border-[1px] border-gray p-3 rounded-md flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                <div id="profile-image" className="w-[45px] h-[45px] rounded-full bg-slate-200"></div>
+                <div>
+                  <h2 className="text-[11px] font-bold">{member.username}</h2>
+                  <span>{member.role}</span>
+                </div>
               </div>
-            </div>
-            <div className="w-[45px] h-[45px] text-[15px] border-[1px] border-slate-200 rounded-md flex justify-center items-center cursor-pointer" onClick={() => toggleMenu(member.id)}>
-              {activeMemberId === member.id ? <BiX /> : <BiDotsVertical />}
-            </div>
+              <div className="w-[45px] h-[45px] text-[15px] border-[1px] border-slate-200 rounded-md flex justify-center items-center cursor-pointer" onClick={() => toggleMenu(member.id)}>
+                {activeMemberId === member.id ? <BiX /> : <BiDotsVertical />}
+              </div>
 
-            {activeMemberId === member.id && (
-              <div className="absolute right-[60px] rounded-md text-white">
-                <button id="view-profile-button" className="w-[140px] h-[45px] border-[1px] text-black border-slate-200 rounded-md mr-2">
-                  Profile
-                </button>
-                <button id="delete-member-button" className="w-[140px] h-[45px] bg-red-400 hover:bg-red-500 transition rounded-md" onClick={() => handleDeleteClick(member)}>
-                  Delete
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
+              {activeMemberId === member.id && (
+                <div className="absolute right-[60px] rounded-md text-white">
+                  <button id="view-profile-button" className="w-[140px] h-[45px] border-[1px] text-black border-slate-200 rounded-md mr-2">
+                    Profile
+                  </button>
+                  <button id="delete-member-button" className="w-[140px] h-[45px] bg-red-400 hover:bg-red-500 transition rounded-md" onClick={() => handleDeleteClick(member)}>
+                    Delete
+                  </button>
+                </div>
+              )}
+            </div>
+          ))
+        ) : (
+          <p className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-gray-500">No members found.</p>
+        )}
       </div>
 
       {deleteModalActive && <DeleteModal member={memberToDelete} onCancel={handleCancelDelete} onConfirm={handleConfirmDelete} />}
