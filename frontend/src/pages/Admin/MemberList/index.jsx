@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import UserService from '../../../services/UserService';
-import { BiSearch, BiDotsVertical, BiX } from 'react-icons/bi';
+import { BiDotsVertical, BiX } from 'react-icons/bi';
 import DeleteModal from './DeleteModal';
 
 const MemberList = () => {
