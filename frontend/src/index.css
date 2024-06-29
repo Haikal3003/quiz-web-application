@@ -16,10 +16,6 @@ option {
   @apply max-w-full w-full outline-none p-5 bg-transparent;
 }
 
-input {
-  @apply bg-gray mt-2;
-}
-
 img {
   @apply max-w-full w-full h-full object-cover;
 }

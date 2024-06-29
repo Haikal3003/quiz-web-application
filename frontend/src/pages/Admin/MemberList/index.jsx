@@ -55,8 +55,8 @@ const MemberList = () => {
     <section id="admin-member-list" className="flex flex-col">
       <h1 id="heading">Member List</h1>
       <div className="w-full">
-        <div className="w-full flex items-center gap-3 mb-5">
-          <input type="text" placeholder="Search member..." value={search} onChange={(e) => setSearch(e.target.value)} />
+        <div className="w-full flex items-center gap-3 mb-5 ">
+          <input type="text" placeholder="Search member..." className="bg-gray" value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
       </div>
 
