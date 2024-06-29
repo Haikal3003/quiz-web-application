@@ -2,8 +2,8 @@ import React from 'react';
 import { IoReturnUpBackOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import CreateQuizForm from './CreateQuizForm';
-import QuizService from '../../../services/QuizService';
-import { toastSuccess } from '../../../utils/Toast';
+import QuizService from '../../../../services/QuizService';
+import { toastSuccess } from '../../../../utils/Toast';
 
 const CreateQuizPage = () => {
   const navigate = useNavigate();

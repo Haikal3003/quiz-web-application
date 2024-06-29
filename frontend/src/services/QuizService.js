@@ -3,7 +3,6 @@ import axios from 'axios';
 const QUIZ_API_URL = 'http://localhost:8080/api/quizzes';
 
 class QuizService {
-  // Get All quiz
   async getAllQuizzes() {
     try {
       const res = await axios.get(QUIZ_API_URL);
@@ -13,7 +12,6 @@ class QuizService {
     }
   }
 
-  // Get quiz by id
   async getQuizById(id) {
     try {
       const res = await axios.get(QUIZ_API_URL + `/${id}`);
@@ -23,7 +21,6 @@ class QuizService {
     }
   }
 
-  // Create quiz
   async createQuiz(quiz) {
     try {
       const res = await axios.post(QUIZ_API_URL + '/add-quiz', quiz);

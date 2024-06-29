@@ -53,7 +53,4 @@ public class AuthService {
         return modelMapper.map(savedUser, UserDTO.class);
     }
 
-
-
-
 }

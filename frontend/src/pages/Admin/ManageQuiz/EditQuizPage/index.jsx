@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { IoReturnUpBackOutline } from 'react-icons/io5';
 import { useNavigate, useParams } from 'react-router-dom';
-import QuizService from '../../../services/QuizService';
+import QuizService from '../../../../services/QuizService';
 import EditQuizForm from './EditQuizForm';
-import Loader from '../../../components/Loader';
+import Loader from '../../../../components/Loader';
 
 const EditQuizPage = () => {
   const [quiz, setQuiz] = useState({});

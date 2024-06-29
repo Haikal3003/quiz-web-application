@@ -3,7 +3,6 @@ import axios from 'axios';
 const USER_API_URL = 'http://localhost:8080/api/users';
 
 class UserService {
-  // get all users
   async getAllUsers() {
     try {
       const res = await axios.get(USER_API_URL);
@@ -13,7 +12,6 @@ class UserService {
     }
   }
 
-  // delete user
   async deleteUserById(id) {
     try {
       const res = await axios.delete(USER_API_URL + `/delete/${id}`);

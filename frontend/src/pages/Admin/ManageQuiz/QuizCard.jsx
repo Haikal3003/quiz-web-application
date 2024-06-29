@@ -40,13 +40,13 @@ const QuizCard = ({ quiz, onDeleteQuiz }) => {
         </div>
 
         <div className="w-full h-full border-t-[1px] border-t-slate-200 flex p-2">
-          <Link to={`/admin/manage-quiz/update-quiz/${quiz.id}`} className="w-full h-full border-r-[1px] border-r-slate-200 flex items-center justify-center">
+          <Link to={`/admin/manage-quiz/edit-quiz/${quiz.id}`} className="w-full h-full border-r-[1px] border-r-slate-200 flex items-center justify-center">
             <button type="button" id="edit-quiz-button" className="w-[90%] h-[40px] border-[1px] border-black rounded-full">
               Edit
             </button>
           </Link>
 
-          <Link className="w-full h-full  flex items-center justify-center">
+          <Link to={`/admin/view-quiz/${quiz.id}`} className="w-full h-full  flex items-center justify-center">
             <button type="button" id="view-quiz-button" className="w-[90%] h-[40px] border-[1px] border-black rounded-full">
               View
             </button>

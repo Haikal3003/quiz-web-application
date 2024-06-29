@@ -38,7 +38,7 @@ const ManageQuiz = () => {
 
         <div id="quiz-card-container" className="grid grid-cols-3 gap-3 my-10">
           {quizzes.map((quiz) => {
-            return <QuizCard key={quiz.id} quiz={quiz} onDeleteQuiz={handleDeleteQuiz}/>;
+            return <QuizCard key={quiz.id} quiz={quiz} onDeleteQuiz={handleDeleteQuiz} />;
           })}
         </div>
       </div>
