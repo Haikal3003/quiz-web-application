@@ -16,7 +16,7 @@ import com.fikry.backend.service.AuthService;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin
-public class AuthController {
+public class AuthController  {
     
     @Autowired
     private AuthService authService;
