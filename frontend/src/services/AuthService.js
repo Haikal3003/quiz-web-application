@@ -7,11 +7,16 @@ class AuthService {
     try {
       const res = await axios.post(AUTH_API_URL + '/login', { email, password });
 
-      localStorage.setItem('user', JSON.stringify(res.data));
+      if (res.data) {
+        localStorage.setItem('user', JSON.stringify(res.data));
 
-      return res.data;
+        return res.data;
+      } else {
+        throw new Error('Invalid response data');
+      }
     } catch (error) {
-      console.log(error);
+      console.error('Login failed:', error.message);
+      throw error;
     }
   }
 
@@ -27,10 +32,10 @@ class AuthService {
         res.data.role = 'member';
       }
 
-      localStorage.setItem('user', JSON.stringify(res.data));
       return res.data;
     } catch (error) {
-      console.log(error);
+      console.error('Registration failed:', error.message);
+      throw error;
     }
   }
 

@@ -1,32 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Dashboard from '../pages/Admin/Dashboard';
-import AdminSidebar from '../components/Sidebar/AdminSidebar';
-import ManageQuiz from '../pages/Admin/ManageQuiz';
-import MemberList from '../pages/Admin/MemberList';
-import QuizReport from '../pages/Admin/QuizReport';
-import CreateQuizPage from '../pages/Admin/ManageQuiz/CreateQuizPage';
-import EditQuizPage from '../pages/Admin/ManageQuiz/EditQuizPage';
-import ViewQuizPage from '../pages/Admin/ManageQuiz/ViewQuizPage';
+import AdminSidebar from '../components/Admin/Sidebar/AdminSidebar';
+import QuizManagementPage from '../pages/Admin/Quizzes';
+import CreateQuizPage from '../pages/Admin/Quizzes/CreateQuiz';
+import EditQuizPage from '../pages/Admin/Quizzes/EditQuiz';
+import MemberListPage from '../pages/Admin/MemberList';
+import QuizReportPage from '../pages/Admin/QuizReport';
+import PreviewQuizPage from '../pages/Admin/Quizzes/PreviewQuiz';
 
 const AdminRoutes = () => {
   const location = useLocation();
 
-  const paths = ['/admin/dashboard', '/admin/manage-quiz', '/admin/member-list', '/admin/quiz-report', '/admin/manage-quiz/add-quiz', '/admin/manage-quiz/update-quiz/:quizId'];
+  const paths = ['/admin/dashboard', '/admin/quiz-management', '/admin/member-list', '/admin/quiz-report'];
 
   const showSidebar = paths.some((path) => location.pathname.startsWith(path));
+
+  useEffect(() => {
+    if (location.pathname.startsWith('/admin')) {
+      document.querySelector('body').className = 'bg-darkTheme-primary';
+    }
+  }, []);
 
   return (
     <>
       {showSidebar && <AdminSidebar />}
       <Routes>
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="manage-quiz" element={<ManageQuiz />} />
-        <Route path="member-list" element={<MemberList />} />
-        <Route path="quiz-report" element={<QuizReport />} />
-        <Route path="manage-quiz/add-quiz" element={<CreateQuizPage />} />
-        <Route path="manage-quiz/edit-quiz/:quizId" element={<EditQuizPage />} />
-        <Route path="/view-quiz/:quizId" element={<ViewQuizPage />} />
+        <Route path="quiz-management">
+          <Route index element={<QuizManagementPage />} />
+          <Route path="create-quiz" element={<CreateQuizPage />} />
+          <Route path="edit-quiz/:quizId" element={<EditQuizPage />} />
+          <Route path="preview-quiz/:quizId" element={<PreviewQuizPage />} />
+        </Route>
+        <Route path="member-list" element={<MemberListPage />} />
+        <Route path="quiz-report" element={<QuizReportPage />} />
       </Routes>
     </>
   );

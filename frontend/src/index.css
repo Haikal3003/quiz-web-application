@@ -6,8 +6,16 @@ html {
   @apply scroll-smooth text-[62.5%];
 }
 
-body {
-  @apply font-poppins;
+body::-webkit-scrollbar {
+  @apply w-[6px];
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply bg-slate-50;
 }
 
 input,
@@ -20,15 +28,14 @@ img {
   @apply max-w-full w-full h-full object-cover;
 }
 
-section {
-  @apply relative ml-[20%] mr-[5%] mt-20;
-}
-
 section #heading {
-  @apply text-[25px] uppercase font-bold;
+  @apply font-bold text-[30px];
 }
 
-/* Login form */
+section {
+  @apply relative ml-[10%] mr-[5%] mt-20;
+}
+
 #login-form .input-container,
 #register-form .input-container {
   @apply flex flex-col mb-8;
@@ -36,28 +43,37 @@ section #heading {
 
 #login-form label,
 #register-form label {
-  @apply text-[12px] font-semibold mb-2;
+  @apply text-[13px] font-semibold mb-2;
 }
 
-/* quiz form */
-#create-quiz-page #quiz-form label {
-  @apply font-semibold text-[11px];
+#login-form input,
+#register-form input {
+  @apply text-[12px];
 }
 
-#create-quiz-page #quiz-form input {
-  @apply bg-gray mt-2;
+#create-quiz-form #input-container,
+#edit-quiz-form #input-container {
+  @apply flex justify-start items-center py-3 gap-3;
 }
 
-#create-quiz-page #quiz-form select {
-  @apply bg-gray mt-2;
+#create-quiz-form #input-container label,
+#edit-quiz-form #input-container label {
+  @apply flex justify-center items-center rounded-xl py-4 px-6 border-[1px] border-darkTheme-gray text-[12px];
 }
 
-#create-quiz-page #quiz-form option {
-  @apply bg-gray mt-2;
+#create-quiz-form #input-container input,
+#edit-quiz-form #input-container input {
+  @apply p-4 border-[1px] border-darkTheme-gray rounded-xl text-[11px];
 }
 
-#quiz-form #line {
-  @apply w-full h-[2px] bg-black;
+#create-quiz-form #input-container select,
+#edit-quiz-form #input-container select {
+  @apply border-[1px] border-darkTheme-gray rounded-xl text-[11px];
+}
+
+#create-quiz-form #input-container select option,
+#edit-quiz-form #input-container select option {
+  @apply text-black;
 }
 
 /* Loader */

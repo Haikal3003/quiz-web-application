@@ -1,11 +1,13 @@
 import React from 'react';
 
-const QuizReport = () => {
+const QuizReportPage = () => {
   return (
-    <section id="admin-quiz-report">
-      <h1 id="heading">Quiz Report</h1>
+    <section>
+      <div>
+        <h1 id="heading">Quiz Report</h1>
+      </div>
     </section>
   );
 };
 
-export default QuizReport;
+export default QuizReportPage;

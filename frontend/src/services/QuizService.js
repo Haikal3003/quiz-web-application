@@ -39,7 +39,7 @@ class QuizService {
     }
   }
 
-  async deleteQuiz(id) {
+  async deleteQuizById(id) {
     try {
       const res = await axios.delete(QUIZ_API_URL + `/delete/${id}`);
     } catch (err) {
